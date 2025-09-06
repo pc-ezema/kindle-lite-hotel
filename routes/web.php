@@ -10,3 +10,4 @@ Route::post('/contact-us/submit', [HomePageController::class, 'submitContact'])-
 Route::get('/faqs', [HomePageController::class, 'faqs'])->name('faqs');
 Route::get('/gallery', [HomePageController::class, 'gallery'])->name('gallery');
 Route::get('/booking-system', [HomePageController::class, 'bookingSystem'])->name('bookingSystem');
+Route::post('/book-now', [HomePageController::class, 'bookNow'])->name('bookNow');

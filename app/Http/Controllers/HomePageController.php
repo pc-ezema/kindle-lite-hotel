@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\Room;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +17,11 @@ class HomePageController extends Controller
 {
     public function index() 
     {
-        return view('pages.index');
+        $rooms = Room::get();
+
+        return view('pages.index', [
+            'rooms' => $rooms
+        ]);
     }
 
     public function aboutUs() 
@@ -66,12 +74,12 @@ class HomePageController extends Controller
             'subject'    => $request->subject,
             'description'=> $request->message,
             'created_at' => now(),
-            'admin'      => 'customercare@gmail.com',
+            'admin'      => 'promiseezema11@gmail.com',
         ];
 
         // Send message to the admin
         Mail::send('emails.contact', $data, function ($m) use ($data) {
-            $m->to($data['admin'])->subject(config('app.name') . ' Contact Form Notification');
+            $m->to($data['admin'])->subject(config('app.name') . ' - Contact Form Notification');
         });
 
         // Return success response
@@ -93,6 +101,86 @@ class HomePageController extends Controller
 
     public function bookingSystem() 
     {
-        return view('pages.booking-system');
+        $rooms = Room::get();
+
+        return view('pages.booking-system', [
+            'rooms' => $rooms
+        ]);
+    }
+
+    public function bookNow(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'roomId'      => 'nullable|exists:rooms,id',
+            'name'        => 'required|string|max:255',
+            'phoneNumber' => 'required|string|max:20',
+            'email' => [
+                'required',
+                'email:rfc,strict',
+                'max:255',
+                'regex:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
+            ],
+            'checkIn'     => 'required|date',
+            'checkOut'    => 'required|date|after:checkIn',
+            'adult'       => 'required|integer|min:1',
+            'child'       => 'nullable|integer|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            Log::info(['errors' => $validator->errors()]);
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $room = Room::find($request->roomId);
+
+        if(!$room)
+        {
+            // Return success response
+            return response()->json([
+                'success' => false,
+                'message' => "Room doesn't exist.",
+            ]);
+        }
+
+        $booking = Booking::create($request->all());
+
+        /** Store information to include in mail in $data as an array */
+        $data = [
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'phone'     => $request->phoneNumber,
+            'checkin'   => Carbon::parse($request->checkIn)->format('F j, Y'),
+            'checkout'  => Carbon::parse($request->checkOut)->format('F j, Y'),
+            'adult'     => $request->adult,
+            'child'     => $request->child,
+            'room'      => ucfirst($room->type),
+            'created_at'=> now(),
+            'admin'     => 'promiseezema11@gmail.com',
+        ];
+
+        try {
+            /** Send message to the admin */
+            Mail::send('emails.guestInfo', $data, function ($m) use ($data) {
+                $m->to($data['email'])->subject(config('app.name').' - Room Booking Form Notification');
+            });
+        } catch (Exception $e)
+        {
+            // Log the error
+            Log::error('Error dispatching email for user: ' . $e->getMessage());
+        }
+
+        /** Send message to the admin */
+        Mail::send('emails.booking', $data, function ($m) use ($data) {
+            $m->to($data['admin'])->subject(config('app.name').' - Room Booking Form Notification');
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for booking with us! Your room reservation has been successfully confirmed. We look forward to welcoming you on ' .
+                        Carbon::parse($request->checkIn)->format('F j, Y') .
+                        ' and ensuring you have a delightful stay with us. Please call our 24/7 Phone numbers [' .
+                        config('app.phone') . '] to advise us of your arrival time. Safe travels until we meet!',
+            'data'    => $booking
+        ]);
     }
 }

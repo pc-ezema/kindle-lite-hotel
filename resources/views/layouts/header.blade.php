@@ -30,7 +30,7 @@
                 </div>
                 <div class="header__area-menubar-right-box">
                     <div class="header__area-menubar-right-box-btn">
-                        <a class="theme-btn" href="">Book Now<i class="fas fa-long-arrow-right"></i></a>
+                        <a class="theme-btn" href="{{route('bookingSystem')}}">Book Now<i class="fas fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

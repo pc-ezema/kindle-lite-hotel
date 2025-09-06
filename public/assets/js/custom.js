@@ -3,8 +3,6 @@
 	$("[data-background]").each(function() {
 		$(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
 	});
-	/*========== Nice Select ==========*/
-	$('select').niceSelect();	
 	/*==========  Search  ==========*/
 	$('.header__area-menubar-right-box-search-icon.open').on('click', function() {
 		$('.header__area-menubar-right-box-search-box').fadeIn().addClass('active');

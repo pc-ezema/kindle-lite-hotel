@@ -44,85 +44,57 @@
 <div class="deluxe__area section-padding">
     <div class="container">
         <div class="row align-items-end mb-60">
-            <div class="col-xl-5">
+            <div class="col-xl-12">
                 <div class="deluxe__area-title">
                     <span class="subtitle__one">Deluxe and Luxury</span>
                     <h2>Our Luxury Rooms</h2>
                 </div>
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-12">
                 <div class="deluxe__area-btn">
                     <ul>
                         <li class="active" data-filter="*">All Rooms</li>
-                        <li data-filter=".luxury">Luxury</li>
-                        <li data-filter=".single">Single</li>
-                        <li data-filter=".suite">Small Suite</li>
-                        <li data-filter=".family">Family</li>
+                        @php
+                            // Get unique room types dynamically
+                            $roomTypes = $rooms->pluck('type')->unique();
+                        @endphp
+
+                        @foreach($roomTypes as $type)
+                            @php
+                                // Convert type into a safe class name
+                                $filterClass = strtolower(str_replace(' ', '-', $type));
+                            @endphp
+                            <li data-filter=".{{ $filterClass }}">{{ $type }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class="row deluxe__area-active">
-            <div class="col-xl-3 col-lg-4 mb-30 suite">
-                <div class="deluxe__area-item">
-                    <div class="deluxe__area-item-image">
-                        <img class="img__full" src="{{url('assets/img/luxury/luxury-1.jpg')}}" alt="">
-                    </div>
-                    <div class="deluxe__area-item-content">
-                        <h6><a href="#"><span>₦134,000</span> / Night</a></h6>
-                        <h4><a href="#">Small Suite</a></h4>
-                        <a class="simple-btn" href="#"><i class="far fa-chevron-right"></i>Booking Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-8 mb-30 suite">
-                <div class="deluxe__area-item deluxe__area-item-hover">
-                    <div class="deluxe__area-item-image">
-                        <img class="img__full" src="{{url('assets/img/luxury/luxury-2.jpg')}}" alt="">
-                    </div>
-                    <div class="deluxe__area-item-content">
-                        <h6><a href="#"><span>₦199,000</span> / Night</a></h6>
-                        <h4><a href="#">Deluxe Room</a></h4>
-                        <a class="simple-btn" href="#"><i class="far fa-chevron-right"></i>Booking Now</a>
+            @forelse($rooms as $room)
+                @php
+                    // Same class conversion for filtering
+                    $filterClass = strtolower(str_replace(' ', '-', $room->type));
+                @endphp
+
+                <div class="col-xl-4 col-lg-6 mb-30 {{ $filterClass }}">
+                    <div class="deluxe__area-item">
+                        <div class="deluxe__area-item-image">
+                            <img class="img__full" src="{{ $room->image }}" alt="{{ $room->type }}">
+                        </div>
+                        <div class="deluxe__area-item-content">
+                            <h6><a href="#"><span>₦{{ number_format($room->price, 0) }}</span> / Night</a></h6>
+                            <h4><a href="#">{{ $room->type }}</a></h4>
+                            <a class="simple-btn" href="{{route('bookingSystem')}}"><i class="fas fa-chevron-right"></i> Booking Now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 mb-30 family">
-                <div class="deluxe__area-item">
-                    <div class="deluxe__area-item-image">
-                        <img class="img__full" src="{{url('assets/img/luxury/luxury-3.jpg')}}" alt="">
-                    </div>
-                    <div class="deluxe__area-item-content">
-                        <h6><a href="#"><span>₦319,000</span> / Night</a></h6>
-                        <h4><a href="#">Family Room</a></h4>
-                        <a class="simple-btn" href="#"><i class="far fa-chevron-right"></i>Booking Now</a>
-                    </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">No rooms available at the moment. Please check back later.</p>
                 </div>
-            </div>
-            <div class="col-xl-6 col-lg-8 lg-mb-30 single">
-                <div class="deluxe__area-item">
-                    <div class="deluxe__area-item-image">
-                        <img class="img__full" src="{{url('assets/img/luxury/luxury-4.jpg')}}" alt="">
-                    </div>
-                    <div class="deluxe__area-item-content">
-                        <h6><a href="#"><span>₦169,000</span> / Night</a></h6>
-                        <h4><a href="#">Single Room</a></h4>
-                        <a class="simple-btn" href="#"><i class="far fa-chevron-right"></i>Booking Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 luxury">
-                <div class="deluxe__area-item">
-                    <div class="deluxe__area-item-image">
-                        <img class="img__full" src="{{url('assets/img/luxury/luxury-5.jpg')}}" alt="">
-                    </div>
-                    <div class="deluxe__area-item-content">
-                        <h6><a href="#"><span>₦249,000</span> / Night</a></h6>
-                        <h4><a href="#">Luxury Room</a></h4>
-                        <a class="simple-btn" href="#"><i class="far fa-chevron-right"></i>Booking Now</a>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </div>
@@ -152,8 +124,8 @@
     <div class="container">
         <div class="row">
             <div class="booking__two-title mb-5">
-                <h2>Our Facilties</h2>
-                <p>Indulge in Luxury: Explore Our Premium Facilities</p>                        
+                <h2>Our Facilities</h2>
+                <p>Indulge in Luxury: Explore Our Premium Facilities</p>
             </div>
             <!-- Room Cleaning -->
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 lg-mb-30 mb-5">
@@ -190,19 +162,6 @@
                     <div class="services__area-item-content">
                         <h5><a href="#">Pickup & Drop</a></h5>
                         <p>Convenient airport transfers and shuttle services at your request.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Swimming Pool -->
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 lg-mb-30 mb-5">
-                <div class="services__area-item">
-                    <div class="services__area-item-icon">
-                        <i class="fas fa-swimming-pool"></i>
-                    </div>
-                    <div class="services__area-item-content">
-                        <h5><a href="#">Swimming Pool</a></h5>
-                        <p>Relax and refresh in our crystal-clear outdoor swimming pool.</p>
                     </div>
                 </div>
             </div>
@@ -416,6 +375,8 @@
 @endsection
 @push('scripts')
 <script>
+    /*========== Nice Select ==========*/
+	$('select').niceSelect();	
     var testimonialSwiper = new Swiper(".testimonial__slider", {
         loop: true, // enables continuous loop
         autoplay: {

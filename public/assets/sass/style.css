@@ -101,7 +101,8 @@ input[type=time],
 input[type=datetime],
 input[type=datetime-local],
 input[type=color],
-textarea {
+textarea,
+select {
   color: var(--body-color);
   border: 1px solid;
   border-radius: 0px;
@@ -581,7 +582,7 @@ Video Animation CSS
   --white: #FFFFFF;
   --black: #000000;
   --primary-color: #e1c272;
-  --heading-color: #815cd4;
+  --heading-color: #5f1972;
   --body-color: #333334;
   --color-1: #666667;
   --color-2: #999999;
@@ -4731,7 +4732,7 @@ Deluxe
   background: var(--color-4);
 }
 .deluxe__area-btn {
-  text-align: right;
+  text-align: center;
 }
 .deluxe__area-btn ul {
   padding: 0;
@@ -4747,6 +4748,7 @@ Deluxe
   background: var(--white);
   padding: 11px 25px 13px 25px;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 .deluxe__area-btn ul li.active {
   background: var(--primary-color);
@@ -5032,7 +5034,10 @@ Deluxe Two
 .deluxe__three-item.center {
   margin-top: -90px;
 }
-
+.deluxe__area-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
 @media (max-width: 1399px) {
   .deluxe__two-item-content-meta ul li {
     margin-right: 17px;
@@ -6396,7 +6401,7 @@ Testimonial
 .testimonial__area-item-dots {
   position: absolute;
   left: 45%;
-  bottom: 15px;
+  bottom: 25px;
   z-index: 1;
 }
 .testimonial__area-item-dots .pagination .swiper-pagination-bullet {
@@ -6934,6 +6939,11 @@ Contact
   color: var(--primary-color);
 }
 .contact__area-form-item input {
+  font-size: 14px;
+  background: transparent;
+  padding-left: 45px;
+}
+.contact__area-form-item select {
   font-size: 14px;
   background: transparent;
   padding-left: 45px;

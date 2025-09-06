@@ -4,7 +4,10 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="banner__area-title">
-                    <h1>Stay in Style <span>Relax in Luxury</span></h1>
+                    <h1>Stay in Style, <span>Relax in Luxury</span></h1>
+                    <div class="banner__two-content-button fadeInUp animated" data-animation="fadeInUp" data-delay="1s" style="animation-delay: 1s; display: flex; justify-content: center;">
+                        <a class="theme-btn" href="{{route('bookingSystem')}}">Book Now</a>
+                    </div>
                     <div class="banner__area-title-video">
                         <div class="video__play">
                             <a class="video-popup" href=""><i class="fas fa-play"></i></a>
@@ -26,16 +29,15 @@
                         <div class="check__area-item-room">
                             <p>Room</p>
                             <select name="select">
-                                <option value="1">1 Room</option>
-                                <option value="2">2 Room</option>
-                                <option value="3">3 Room</option>
-                                <option value="4">4 Room</option>
-                                <option value="5">5 Room</option>
+                                <option value="">-- Select Room --</option>
+                                @foreach($rooms as $room)
+                                <option value="{{$room->type}}">{{$room->type}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="check__area-item button">
-                        <button class="theme-btn" type="submit">Check Now</button>
+                        <button class="theme-btn" type="submit">Search</button>
                     </div>
                 </div>
             </form>
