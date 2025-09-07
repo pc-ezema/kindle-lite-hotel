@@ -14,12 +14,21 @@
                         <ul id="mobilemenu">
                             <li><a class="{{ (request()->is('/')) ? 'headerActive' : '' }}" href="{{route('index')}}">Home</a></li>
                             <li class=""><a class="{{ (request()->is('about-us')) ? 'headerActive' : '' }}" href="{{route('aboutUs')}}">About Us</a></li>
-                            <li class="menu-item-has-children"><a href="#">Room</a>
+                            <li class="menu-item-has-children">
+                                <a href="#">Rooms</a>
                                 <ul class="sub-menu">
-                                    <li><a href="#">Room Style</a></li>
-                                    <li><a href="#">Room Modern</a></li>
-                                    <li><a href="#">Room List</a></li>
-                                    <li><a href="#">Room Details</a></li>
+                                    @forelse($roomTypes as $roomType)
+                                    @php
+                                    $slug = Str::slug($roomType->type); // e.g., "Luxury Room" → "luxury-room"
+                                    @endphp
+                                    <li>
+                                        <a href="{{ route('room.details', ['type' => $slug]) }}">
+                                            {{ $roomType->type }}
+                                        </a>
+                                    </li>
+                                    @empty
+                                    <li><a href="#">No Rooms Available</a></li>
+                                    @endforelse
                                 </ul>
                             </li>
                             <li class=""><a class="{{ (request()->is('gallery')) ? 'headerActive' : '' }}" href="{{route('gallery')}}">Gallery</a></li>

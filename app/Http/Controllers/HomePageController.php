@@ -183,4 +183,12 @@ class HomePageController extends Controller
             'data'    => $booking
         ]);
     }
+
+    public function roomByType($type)
+    {
+        $room = Room::where('type', 'like', str_replace('-', ' ', $type))->first();
+
+        return view('pages.rooms', compact('room', 'type'));
+    }
+
 }

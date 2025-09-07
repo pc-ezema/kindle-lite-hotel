@@ -64,6 +64,7 @@
                             <li><a href="{{route('gallery')}}"><i class="fas fa-angle-double-right"></i>Gallery</a></li>
                             <li><a href="{{route('faqs')}}"><i class="fas fa-angle-double-right"></i>FAQs</a></li>
                             <li><a href="{{route('contactUs')}}"><i class="fas fa-angle-double-right"></i>Contact Us</a></li>
+                            <li><a href="{{route('bookingSystem')}}"><i class="fas fa-angle-double-right"></i>Booking</a></li>
                         </ul>
                     </div>
                 </div>

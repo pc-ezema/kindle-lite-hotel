@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="banner__area-title">
-                    <h1>Stay in Style, <span>Relax in Luxury</span></h1>
+                    <h1 class="fadeInUp animated" data-animation="fadeInUp" data-delay="0.5s" style="animation-delay: 0.5s;">
+                        Stay in Style, <span>Relax in Luxury</span>
+                    </h1>
                     <div class="banner__two-content-button fadeInUp animated" data-animation="fadeInUp" data-delay="1s" style="animation-delay: 1s; display: flex; justify-content: center;">
                         <a class="theme-btn" href="{{route('bookingSystem')}}">Book Now</a>
                     </div>
@@ -37,7 +39,7 @@
                         </div>
                     </div>
                     <div class="check__area-item button">
-                        <button class="theme-btn" type="submit">Search</button>
+                        <a href="{{route('bookingSystem')}}" class="theme-btn" type="submit">Search</a>
                     </div>
                 </div>
             </form>
