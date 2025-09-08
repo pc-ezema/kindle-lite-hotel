@@ -34,7 +34,7 @@
 		meanMenuContainer: '.responsive-menu',
 		meanScreenWidth: '991',
 		meanMenuOpen: '<span></span><span></span><span></span>',
-		meanMenuClose: '<i class="fal fa-times"></i>'
+		meanMenuClose: '<i class="fas fa-times"></i>'
 	});
 	/*========== menu-bar sticky  ==========*/
 	$(window).on('scroll', function() {

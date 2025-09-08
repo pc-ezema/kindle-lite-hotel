@@ -104,7 +104,7 @@
                             <div class="col-lg-12">
                                 <div class="contact__area-form-item">
                                     <button id="submitContactBtn" class="theme-btn" type="submit">
-                                        Submit Now <i class="fal fa-long-arrow-right"></i>
+                                        Submit Now <i class="fas fa-long-arrow-right"></i>
                                     </button>
                                 </div>
                             </div>

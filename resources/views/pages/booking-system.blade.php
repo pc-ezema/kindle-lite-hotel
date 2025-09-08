@@ -110,7 +110,7 @@
                             <!-- Submit -->
                             <div class="col-sm-12" style="margin-bottom: 50px; text-align: center;">
                                 <button type="submit" id="submitContactBtn" class="theme-btn">
-                                    Book Now <i class="fal fa-long-arrow-right"></i>
+                                    Book Now <i class="fas fa-long-arrow-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                     }
                 },
                 complete: function() {
-                    submitBtn.prop('disabled', false).html('Book Now <i class="fal fa-long-arrow-right"></i>');
+                    submitBtn.prop('disabled', false).html('Book Now <i class="fas fa-long-arrow-right"></i>');
                 }
             });
         });

@@ -15,14 +15,14 @@
                             <li><a class="{{ (request()->is('/')) ? 'headerActive' : '' }}" href="{{route('index')}}">Home</a></li>
                             <li class=""><a class="{{ (request()->is('about-us')) ? 'headerActive' : '' }}" href="{{route('aboutUs')}}">About Us</a></li>
                             <li class="menu-item-has-children">
-                                <a href="#">Rooms</a>
+                                <a href="#" class="{{ (request()->is('rooms*')) ? 'headerActive' : '' }}">Rooms</a>
                                 <ul class="sub-menu">
                                     @forelse($roomTypes as $roomType)
                                     @php
                                     $slug = Str::slug($roomType->type); // e.g., "Luxury Room" → "luxury-room"
                                     @endphp
                                     <li>
-                                        <a href="{{ route('room.details', ['type' => $slug]) }}">
+                                        <a href="{{ route('room.details', ['type' => $slug]) }}" class="{{ (request()->is('rooms/'.$slug)) ? 'headerActive' : '' }}">
                                             {{ $roomType->type }}
                                         </a>
                                     </li>

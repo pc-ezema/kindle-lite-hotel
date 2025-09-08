@@ -52,16 +52,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6 md-mb-35">
-                                <div class="room__details-right-list-item">
-                                    <div class="room__details-right-list-item-icon">
-                                        <i class="fa-solid fa-spa"></i>
-                                    </div>
-                                    <div class="room__details-right-list-item-title">
-                                        <h6>Spa Center</h6>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-4 col-sm-6 sm-mb-35">
                                 <div class="room__details-right-list-item">
                                     <div class="room__details-right-list-item-icon">
