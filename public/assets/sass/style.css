@@ -2630,7 +2630,7 @@ Menu Bar
   display: inline-block;
 }
 .header__area-menubar-left-logo a img {
-  max-width: 115px;
+  max-width: 140px;
   position: relative;
   z-index: 999;
 }
@@ -2721,7 +2721,7 @@ Menu Bar
   font-weight: 600;
   transition: all 0.4s ease-out 0s;
   text-transform: capitalize;
-  padding: 46px 30px;
+  padding: 46px 16px;
   font-family: var(--heading-font);
 }
 .header__area-menubar-right-menu ul li:last-child a {
@@ -5112,7 +5112,7 @@ Footer
   display: inline-block;
 }
 .footer__area-widget-about-logo a img {
-  max-width: 150px;
+  max-width: 170px;
 }
 .footer__area-widget-about p {
   color: var(--color-3);
