@@ -74,7 +74,7 @@ class HomePageController extends Controller
             'subject'    => $request->subject,
             'description'=> $request->message,
             'created_at' => now(),
-            'admin'      => 'promiseezema11@gmail.com',
+            'admin'      => 'info@kindlelitehotel.com',
         ];
 
         // Send message to the admin
@@ -155,7 +155,7 @@ class HomePageController extends Controller
             'child'     => $request->child,
             'room'      => ucfirst($room->type),
             'created_at'=> now(),
-            'admin'     => 'promiseezema11@gmail.com',
+            'admin'     => 'info@kindlelitehotel.com',
         ];
 
         try {
