@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'email' => 'info@hlh.ng',
+    'email' => 'info@kindlelitehotel.com',
     'phone' => '+2347079070250',
     'address' => 'Zion City Ngor Okpala Imo State.',
 
